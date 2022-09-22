@@ -1,0 +1,23 @@
+１、店舗テーブルから店舗名表示、列名は店舗名にして
+select store_name as 店舗名 from store_table;
+
+２、店舗情報、ABC順に
+select * from store_table order by store_nameABC ASC;
+
+3,在庫テーブルに内部結合、
+select store_name, goods_name, quantity from stock_table JOIN store_table ON stock_table.store_code = store_table.store_code JOIN goods_table ON stock_table.goods_code = goods_table.goods_code;
+
+4,商品の単価の平均値
+select AVG(price) from goods_table;
+
+5、店舗コードEA01の在庫数の平均値より多い在庫数を持つ店舗コード出力
+ select store_code from stock_table where quantity > (select AVG(quantity) from stock_table where store_code = 'EA01');
+
+６、新しいデータの追加
+INSERT INTO goods_table (goods_code, goods_name, price, update_day) VALUES ('M001', 'マフラー','4500','2020-09-23');
+
+7,かつのやつを更新する
+UPDATE stock_table SET (quantity, update_day) = ('10','2022-9-23') WHERE goods_code = 'S987' AND store_code = 'EA01';
+
+８、７のやつを削除する
+delete from stock_table where goods_code = 'S987' AND store_code = 'EA01';
